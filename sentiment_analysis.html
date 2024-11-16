@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #004aad;
+        }
+
+        .post-selection {
+            margin: 2rem auto;
+            padding: 1rem;
+            border-radius: 10px;
+            background: white;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-selection select, button {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            background: #004aad;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <div class="post-selection">
+        <label for="posts">Select a post for analysis:</label>
+        <select id="posts">
+            <option value="0">Excited to have started my new role at [Company]! ...</option>
+            <option value="1">Received feedback on my recent presentation ...</option>
+            <option value="2">We just completed a major milestone on our project ...</option>
+            <option value="3">Attended an insightful webinar on AI trends ...</option>
+            <option value="4">Just hit my one-year work anniversary at [Company] ...</option>
+            <option value="5">Our latest product launch is live! ...</option>
+            <option value="6">Just shared a blog on my latest research ...</option>
+            <option value="7">After months of effort, my startup pitch was rejected ...</option>
+            <option value="8">Started a new course on leadership! ...</option>
+            <option value="9">Struggling with work-life balance lately ...</option>
+        </select>
+        <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+    </div>
+
+    <div id="result" style="text-align:center; margin-top:2rem;">
+        <!-- Sentiment analysis graph will be displayed here -->
+    </div>
+
+   <!---- <script>
+        function analyzeSentiment() {
+            const postIndex = document.getElementById('posts').value;
+
+            // Make a request to the Python backend with the selected post index
+            fetch(/analyze_sentiment?post_index=${postIndex})
+                .then(response => response.json())
+                .then(data => {
+                    // Display the result (graph image)
+                    document.getElementById('result').innerHTML = `
+                        <h2>Analysis Results</h2>
+                        <img src="data:image/png;base64,${data.graph}" alt="Sentiment Analysis Graph" style="max-width:100%; height:auto;">
+                        <p>Detailed Sentiment Breakdown:</p>
+                        <ul>${data.sentences.map(s => <li>${s}</li>).join('')}</ul>
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>-->
+</body>
+</html>
