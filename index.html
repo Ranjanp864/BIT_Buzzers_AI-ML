@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexus Social Engagement Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Social Engagement Tracker</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">About Us</a>
+            
+        </nav>
+    </header>
+
+    <main>
+        <section class="social-media-links">
+            <h2>Connect with Key Contacts</h2>
+            <div class="icons">
+                <img src="face.png" alt="LinkedIn" class="social-icon" onclick="fetchContacts('linkedin')">
+                <img src="insta.png" alt="Instagram" class="social-icon" onclick="fetchContacts('instagram')">
+                <img src="face2.png" alt="Facebook" class="social-icon" onclick="fetchContacts('facebook')">
+            </div>
+        </section>
+
+        <section id="prospect-list">
+            <h2>Prospect List</h2>
+            <div class="contacts"></div>
+        </section>
+
+        <section id="notifications">
+            <h2>Real-Time Notifications</h2>
+            <div class="notification-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Social Engagement Tracker. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
