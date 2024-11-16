@@ -3,45 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexus Social Engagement Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Connexus: Social Engagement Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            scroll-behavior: smooth;
+            background: linear-gradient(to bottom, #f5f7fa, #d9e4f5);
+            color: #333;
+        }
+
+        header {
+            width: 100%;
+            background-color: #004aad;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        header nav a:hover {
+            color: #ffd700;
+        }
+
+        main {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .intro h2 {
+            margin-bottom: 1rem;
+            color: #004aad;
+        }
+
+        .notifications {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-panel {
+            flex: 1;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            background: #f9f9f9;
+            margin-left: 2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem 0;
+        }
+
+        .social-icons i {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #004aad;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons i:hover {
+            transform: scale(1.2);
+            color: #ffd700;
+        }
+
+        .sentiment-analysis {
+            text-align: center;
+        }
+
+        .sentiment-analysis input {
+            padding: 0.5rem;
+            margin-right: 1rem;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #004aad;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Social Engagement Tracker</h1>
+        <h1>Connexus: Social Engagement Tracker</h1>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">About Us</a>
-            
+            <a href="#intro">Home</a>
+            <a href="#notifications">Notifications</a>
+            <a href="#social">Social Media</a>
+            <a href="#sentiment">Sentiment Analysis</a>
         </nav>
     </header>
 
     <main>
-        <section class="social-media-links">
-            <h2>Connect with Key Contacts</h2>
-            <div class="icons">
-                <img src="face.png" alt="LinkedIn" class="social-icon" onclick="fetchContacts('linkedin')">
-                <img src="insta.png" alt="Instagram" class="social-icon" onclick="fetchContacts('instagram')">
-                <img src="face2.png" alt="Facebook" class="social-icon" onclick="fetchContacts('facebook')">
+        <!-- Introduction Section -->
+        <section id="intro" class="intro">
+            <h2>Welcome to Connexus</h2>
+            <p>Your one-stop solution for unified social media engagement. Stay connected, track interactions, and receive actionable insights, all from one platform.</p>
+        </section>
+
+        <!-- Notifications Section -->
+        <section id="notifications" class="notifications">
+            <div>
+                <h2>Real-Time Notifications</h2>
+                <p>Keep track of your key contacts' activities instantly.</p>
+            </div>
+            <div class="notification-panel">
+                <!-- Notifications populated via JavaScript -->
             </div>
         </section>
 
-        <section id="prospect-list">
-            <h2>Prospect List</h2>
-            <div class="contacts"></div>
+        <!-- Social Media Icons Section -->
+        <section id="social">
+            <h2>Fetch Social Media Data</h2>
+            <div class="social-icons">
+                <i class="fab fa-linkedin" onclick="fetchData('LinkedIn')"></i>
+                <i class="fab fa-instagram" onclick="fetchData('Instagram')"></i>
+                <i class="fab fa-facebook" onclick="fetchData('Facebook')"></i>
+            </div>
         </section>
 
-        <section id="notifications">
-            <h2>Real-Time Notifications</h2>
-            <div class="notification-list"></div>
+        <!-- Sentiment Analysis Section -->
+        <section id="sentiment" class="sentiment-analysis">
+            <h2>Analyze Sentiments</h2>
+            <p>Enter a post or keyword to analyze its sentiment:</p>
+            <input type="text" id="sentimentInput" placeholder="Enter post or keyword">
+            <button onclick="analyzeSentiment()">Analyze</button>
+            <div id="sentimentResult"></div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Social Engagement Tracker. All rights reserved.</p>
+        <p>&copy; 2024 Connexus. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        function fetchData(platform) {
+            alert('Fetching data from ${platform}...');
+            // Placeholder for actual API calls
+            // Fetch data via APIs and update UI dynamically
+        }
+
+        function analyzeSentiment() {
+            const input = document.getElementById('sentimentInput').value;
+            if (!input) {
+                alert('Please enter a keyword or post!');
+                return;
+            }
+
+            // Simulate sentiment analysis
+            const sentiment = input.length % 2 === 0 ? 'Positive' : 'Negative';
+            document.getElementById('sentimentResult').innerHTML = <p>Sentiment Analysis Result: <strong>${sentiment}</strong></p>;
+        }
+    </script>
 </body>
 </html>
