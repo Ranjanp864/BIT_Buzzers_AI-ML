@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Connexus: Social Engagement Tracker</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            /* General Reset */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Arial', sans-serif;
+            }
+
+            body {
+                scroll-behavior: smooth;
+                background: linear-gradient(to bottom, #f0f0f0, #e4e7ec);
+                background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+                color: #333;
+                transition: background-color 0.5s ease, color 0.5s ease;
+            }
+
+            header {
+                width: 100%;
+                background-color: #004aad;
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 2rem;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                display: flex;
+                align-items: center;
+            }
+
+            header h1 img {
+                width: 70px;
+                height: 50px;
+                margin-right: 10px;
+            }
+
+            header nav a {
+                color: white;
+                margin: 0 1rem;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+
+            header nav a:hover {
+                color: #ffd700;
+            }
+
+            #toggleMode {
+                cursor: pointer;
+                padding: 0.5rem 1rem;
+                border: none;
+                background: white;
+                color: #004aad;
+                font-weight: bold;
+                border-radius: 5px;
+                transition: background 0.3s ease, color 0.3s ease;
+            }
+
+            #toggleMode:hover {
+                background: #ffd700;
+                color: white;
+            }
+
+            main {
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 2rem;
+                border-radius: 10px;
+                background: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .intro {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .intro h2 {
+                margin-bottom: 1rem;
+                color: #004aad;
+            }
+
+            .social-icons {
+                display: flex;
+                justify-content: space-around;
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+
+            .social-icons div {
+                text-align: center;
+            }
+
+            .social-icons i {
+                font-size: 2rem;
+                cursor: pointer;
+                color: #004aad;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .social-icons i:hover {
+                transform: scale(1.2);
+                color: #ffd700;
+            }
+
+            .social-buttons button {
+                margin-top: 1rem;
+                margin-right: 0.5rem;
+                padding: 0.5rem 1rem;
+                background: #004aad;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 0.9rem;
+                transition: background 0.3s ease;
+            }
+
+            .social-buttons button:hover {
+                background: #ffd700;
+            }
+
+            footer {
+                text-align: center;
+                padding: 1rem;
+                background: #004aad;
+                color: white;
+            }
+
+            .notifications {
+                height: 100px;
+                overflow-y: hidden;
+                border: 2px solid #004aad;
+                border-radius: 10px;
+                background: #f9f9f9;
+                position: relative;
+            }
+
+            .notifications ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                animation: scrollUp 10s linear infinite;
+            }
+
+            .notifications li {
+                padding: 1rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #ddd;
+                background: #fff;
+            }
+
+            @keyframes scrollUp {
+                0% {
+                    transform: translateY(100%);
+                }
+                100% {
+                    transform: translateY(-100%);
+                }
+            }
+
+            /* Dark Mode */
+            body.dark-mode {
+                background: linear-gradient(to bottom, #2c3e50, #34495e);
+                background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+                color: #ecf0f1;
+            }
+
+            body.dark-mode header {
+                background-color: #34495e;
+            }
+
+            body.dark-mode section {
+                background: #2c3e50;
+                box-shadow: 0 4px 8px #00000099;
+            }
+
+            body.dark-mode .notifications {
+                background: #34495e;
+            }
+
+            body.dark-mode #toggleMode {
+                background: #34495e;
+                color: white;
+            }
+
+            body.dark-mode #toggleMode:hover {
+                background: #2ecc71;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>
+                <img src="{{ url_for('static', filename='connexus.jpg') }}" alt="Logo">
+                Connexus: Social Engagement Tracker
+            </h1>
+            <nav>
+                <a href="https://lavender-cahra-84.tiiny.site/">Sentiment Analysis</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Introduction Section -->
+            <section id="intro" class="intro">
+                <h2>Welcome to Connexus</h2>
+                <p>Your one-stop solution for unified social media engagement. Stay connected, track interactions, and receive actionable insights, all from one platform.</p>
+            </section>
+
+            <!-- Real-Time Notifications Section -->
+            <section id="notifications">
+                <h2>Real-Time Notifications</h2>
+                <div class="notifications">
+                    <ul>
+                        {% if notifications %}
+                            {% for notification in notifications %}
+                                <li>
+                                    {{ notification }}
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li>No notifications available.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Social Media Section -->
+            <section id="social">
+                <h2>Fetch Social Media Data</h2>
+                <div class="social-icons">
+                    <div>
+                        <i class="fab fa-linkedin" onclick="fetchData('LinkedIn')"></i>
+                        <div class="social-buttons">
+                            <button onclick="window.location.href='/linkedincontacts';">Key Contacts</button>
+                            <button onclick="window.location.href='/newposts1';">Posts</button>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fab fa-instagram" onclick="fetchData('Instagram')"></i>
+                        <div class="social-buttons">
+                            <button onclick="window.location.href='/instagramcontacts';">Key Contacts</button>
+                            <button onclick="window.location.href='/newposts1';">Posts</button>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fab fa-facebook" onclick="fetchData('Facebook')"></i>
+                        <div class="social-buttons">
+                            <button onclick="window.location.href='/facebookcontacts';">Key Contacts</button>
+                            <button onclick="window.location.href='/newposts1';">Posts</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Connexus. All rights reserved.</p>
+        </footer>
+
+        <script>
+            function fetchData(platform) {
+                alert(Fetching data from ${platform}...);
+            }
+
+            function handleKeyContacts(platform) {
+                alert(Fetching key contacts from ${platform}...);
+            }
+
+            function handlePosts(platform) {
+                alert(Fetching posts from ${platform}...);
+            }
+
+
+        </script>
+    </body>
+</html>
